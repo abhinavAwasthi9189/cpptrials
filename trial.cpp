@@ -1,10 +1,19 @@
-#include <cstddef>
 #include <iostream>
 
 using std::cout;
 using std::cin;
-
+using std::string;
 #define  nn std::endl;
+
+
+//---creating generic function
+//first create a certain generic type.(here called template
+//template <typename G,typename T>
+template <typename T>
+
+// it was a try for something. it didn't work but i learned
+//G parser(T &a, G &b){return (G)a;}
+int parser(T &a){return (int)*a;}
 
 int main(){
     int arr[100];
@@ -33,11 +42,35 @@ int main(){
     } 
     
 
-    int *ptr = nullptr;
+    {int *ptr = nullptr;
     if(ptr ==  nullptr){cout << "no value initialized" << nn;}
     ptr = &arr[7];
     if(ptr ==  nullptr){cout << "no value initialized" << nn;}
-    else{cout << "you shall pass!!" << nn;}
+    else{cout << "you shall pass!!" << nn;}}
+    
+    {//-----DYNAMIC--MEMORY------
+    //we start with a pointer. null is a good practice
+    int *ptr = nullptr;
+    // here new is the keyword that places it in heap. new <memory_type>
+    ptr = new int;
+    cin >> *ptr;
+    cout << ptr << nn;
+    // should delete it at the end.
+    delete ptr;}
+
+    string *ptr = nullptr;
+    ptr = new string[10];
+    for( int i=0; i<10; i++){std::getline(std::cin >> std::ws, *(ptr+i));}
+
+    for( int i =0; i<10; i++){cout << *(ptr+i) << nn;}
+    
+    // add [] just after delete to delete the whole array at the same time.
+    delete[] ptr;
+
+    //here we try the generic function
+    int pp = 3;
+    int parsed = parser("101");
+    cout << parsed << " " << typeid(parsed).name() << nn;
 
     return 0;
 }
