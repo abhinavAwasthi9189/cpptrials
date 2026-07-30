@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <iostream>
 
 using std::cout;
@@ -5,50 +6,43 @@ using std::cin;
 
 #define  nn std::endl;
 
-int num = 5;
-
-//we have created overloading functions here, same name different variables.
-int area( int radius){ return (radius*num);}
-int area( int l, int b){ return (l*b);}
-
 int main(){
-    int num;
-    cin >> num;
+    int arr[100];
     
-    cout << num << nn;
-
-    // writting '::' before a variable name induces its global value
-    cout << ::num<< nn;
-
-    /*int k;
-    cin >> k;
-    cout << ::k << nn;
-    i added this think to see if a variable is called globally but only exisits locally can it be called like this.
-    it tells its wrong before compilation
-    */
-
+    // fill a whole part of memory with a certain value. 
+    // fill(starting adress, ending adress, value)
+    // ussually you will give array name as start and name+ size for the end(or whatever index you want to fill till).
+    // same as range end-1 is the last value seen.
+    std::fill(arr,arr+50,11);
+    std::fill(arr+50,arr+100,12);
     
-    cout << area(4) << nn;
-
-    int arr[] = {1,2,3,4,5,6};
-    int ar[] = {};
-    int a[6];
-
-    cout << sizeof(ar) << nn;
-    cout << sizeof(a) << nn;
-    cout << sizeof(arr) << nn;
-
-    for( int i =0; i<6;i++){
-        cin >> a[i];
-    }
-    
-    cout << nn;
-
-    // .....for each loop.....
-    for(int i : a){
+    int x =0;
+    for(int i : arr){
+        if( x==50){cout << "yes" << nn;}
         cout << i << nn;
+        x++;
     }
     
+    // i thought at start that i can put a pointer at start of array by just adr = &arr.
+    // but apparently
+    int* adr;
+    adr = &arr[0];
+
+    for( int i=0; i<100; i++){
+        cout << *(adr+i) << nn;
+    } 
+    
+
+    int *ptr = nullptr;
+    if(ptr ==  nullptr){cout << "no value initialized" << nn;}
+    ptr = &arr[7];
+    if(ptr ==  nullptr){cout << "no value initialized" << nn;}
+    else{cout << "you shall pass!!" << nn;}
 
     return 0;
 }
+
+// apparently you can make parameters of a function const. so people know you are not suppopse to change it
+// i have no function to use it on right now. so just leaving a comment.
+
+// if you send a parameter you send only the value. for the address pass its reference using &val.
