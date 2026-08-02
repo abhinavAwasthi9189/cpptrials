@@ -1,48 +1,39 @@
+#include <format>
 #include <iostream>
+#include <vector>
 
 using std::cout;
 using std::cin;
 using std::string;
-#define  nn std::endl;
 
-//we can create an name = int connecttion so that with enum when the name comes the value we get the the int.
-enum value{one = 1, three = 3, fourteen = 14};
+#define nn std::endl
 
-class git{
-    // we create python like indentation and inside which we write which are public and which are private.
-    public:
-        int reponum;
-        string name;
-        
+int area(int s){return s*s;}
 
-    private:
-        string password;
-    
-    public:
-        git(string naam, int val){name = naam; reponum = val;}
-        void gitadd(){reponum++;}
-        void get_passwd(string paswd){password = paswd;}
-        bool check(string passwd){return password==passwd;}
-};
+constexpr int volume(int s){ int a = area(s); return a*s;};
 
 int main(){
-    
-    //so we give a value of enume here. same as struct in most casses but we can do equals to with both types
-    value x = one;
-    
+    int k = 10;
 
-    // we can use both the condition the name or the int.
-    if(x==one){cout << "true" <<nn;}
-    if(x==1){cout << "true" <<nn;}
+    // i didn't know we have to do like this for binary in cpp. python it was easier i guess.
+    cout << std::format("{:#b}", k) << nn; 
+    cout << std::format("{:b}", k) << nn; 
+    
+    //here we caused an error using constexpr. we asked it to have a value but we are using a value that can't be know at compile time
+    //constexpr makes it a true constant. constant at compile time not runtime.
+    /*int a = 5;
+    constexpr int vol {volume(a)}; 
+    cout << vol << nn;*/
+    
+    std::vector<int> hello(10);
+    cout << hello.size();
+    cout << "today is the day i learned we caqn get multiple input in a line:" << nn;
+    cin >> hello[0] >> hello[1] >> hello[2] >> hello[3] >> hello[4];
 
-    git abhinav("abhinav",10);
-    cout << abhinav.name << " " << abhinav.reponum << nn;
-    abhinav.get_passwd("peigon");
-    cout << abhinav.check("yctyv") << "  " << abhinav.check("peigon") << nn;
-    abhinav.gitadd();
-    abhinav.gitadd();
-    abhinav.gitadd();
-    cout << abhinav.name << " " << abhinav.reponum << /*abhinav.password <<*/nn;
+    std::vector prime{ 2, 3, 5, 7, 11 };
+    int length { static_cast<int>(std::ssize(prime)) }; // static_cast return value to int
+    std::cout << "length: " << length;
+
 
     return 0;
 }
